@@ -320,14 +320,14 @@ export default function Home() {
           <p>BIURO HANDLOWE</p>
           <img alt='regpol logo' src={BottomLogo}></img>
         </div>
-        <div className="articleDescription">
-          <h2>Wysokiej jakości kleje przemysłowe</h2>
+        <div class="articleDescription">
+          <h2 style="margin-top:30px;">Wysokiej jakości kleje przemysłowe</h2>
           <p>
             Witamy wszystkich bardzo serdecznie. Miło nam, że odwiedziliście Państwo naszą stronę. Firma Biuro Handlowe REGPOL Bydgoszcz Sp. z o.o. istnieje od 1992 roku. Jesteśmy autoryzowanym przedstawicielem firmy HENKEL. W ofercie naszego sklepu znajdują się produkty między innymi takie jak: Loctite 243 oraz Teroson MS 939, które w branży przemysłowej i motoryzacyjnej stanowią podstawową bazę środków chemicznych w naprawach, renowacjach i konserwacjach. Na szczególną uwagę zasługują produkty Teroson. Kleje te nie bez powodu cieszą się dużą popularnością, zważywszy na same pozytywne właściwości. Cały nasz asortyment został skrupulatnie dobrany, aby spełnić nawet najwyższe oczekiwania naszych Klientów.
-            <br />
+            <br><br>
             Nasze doświadczenie, zdobyte po tylu latach obcowania z marką HENKEL, pozwala nam służyć Państwu wszelką pomocą w zakresie doboru odpowiedniego produktu oraz rozwiązywania najbardziej nietypowych problemów, z którymi mogą się Państwo spotkać nie tylko w sferze zawodowej. Serdecznie zapraszamy do skorzystania z naszej oferty!
           </p>
-        </div>
+      </div>
       </StyledArticle>
     </Layout>
   )
