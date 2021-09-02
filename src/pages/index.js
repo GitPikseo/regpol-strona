@@ -282,10 +282,7 @@ export default function Home() {
     <Layout>
       <Helmet>
         <title>
-          Regpol - Kleje przemysłowe, uszczelniacze, silikony | Biuro Handlowe
-          Regpol | Bydgoszcz – Jesteśmy autoryzowanym przedstawicielem firm
-          Henkel, Loctite i Teroson. Znajdziesz u nas kleje przemysłowe,
-          uszczelniacze i silikony. Zapraszamy!
+         Kleje przemysłowe, uszczelniacze, silikony | Loctite 234, teroson ms 939, Tereson kleje - Regpol Bydgoszcz
         </title>
         <meta
           name="description"
