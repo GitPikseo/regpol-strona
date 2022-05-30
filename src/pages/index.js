@@ -1,13 +1,12 @@
-import React from "react"
-import Layout from "../components/Layout"
-import Helmet from "react-helmet"
-import scrollTo from 'gatsby-plugin-smoothscroll';
+import React from "react";
+import Layout from "../components/Layouts";
+import Helmet from "react-helmet";
+import scrollTo from "gatsby-plugin-smoothscroll";
+import styles from "styled-components";
+import { graphql, useStaticQuery } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
 
-import styles from "styled-components"
-import { graphql, useStaticQuery } from "gatsby"
-import Image from "gatsby-image"
-
-import BottomLogo from "../images/regpolLogo/TopLogo.png"
+import BottomLogo from "../images/regpolLogo/TopLogo.png";
 
 const StyledSection = styles.section`
 height: 92vh;
@@ -189,7 +188,7 @@ left: 10%;
 
  
 }
-`
+`;
 const StyledArticle = styles.article`
 width: 80%;
 margin: 20px auto;
@@ -258,31 +257,37 @@ margin: 20px auto;
     height: 20%;
   }
 }
-`
-const getImages = graphql`
-  {
-    fluid: allFile(filter: { relativeDirectory: { eq: "homeimages" } }) {
+`;
+
+const data = graphql`
+  query MyQuery {
+    allImageSharp {
       nodes {
-        childImageSharp {
-          fluid(maxWidth: 1500, quality: 40) {
-            ...GatsbyImageSharpFluid_withWebp_noBase64
-          }
+        gatsbyImageData
+        fluid {
+          originalName
         }
       }
     }
   }
-`
+`;
 
 export default function Home() {
-  const data = useStaticQuery(getImages)
+  const imagesData = useStaticQuery(data);
 
+  const loctiteLogo = imagesData.allImageSharp.nodes.filter(
+    (item) => item.fluid.originalName === "loctiteterosonlogo.jpg"
+  );
 
+  const backgroundImage = imagesData.allImageSharp.nodes.filter(
+    (item) => item.fluid.originalName === "websiteBackground.png"
+  );
 
   return (
     <Layout>
       <Helmet>
         <title>
-         Kleje przemysłowe, uszczelniacze, silikony | Loctite 234, teroson ms 939, Tereson kleje - Regpol Bydgoszcz
+          Kleje przemysłowe, uszczelniacze, silikony | Regpol Bydgoszcz
         </title>
         <meta
           name="description"
@@ -293,6 +298,25 @@ export default function Home() {
           content="Regpol Henkel Loctite Teroson Bonderite"
         />
         <link rel="canonical" href="https://www.regpol.info/"></link>
+        <meta
+          name="google-site-verification"
+          content="0t_mUGg6-O9Is_yqF-wo4-LiCuWSniEbcSsZ5cW0qPs"
+        />
+
+        <script type="application/ld+json">{`
+        {
+          "@context": "http://schema.org",
+          "@type": "LocalBusiness",
+          "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bydgoszcz",
+          "addressRegion": "Kujawsko-Pomorskie",
+          "streetAddress": " Lecha Kaczyńskiego"
+          },
+          "name": "Regpol",
+          "telephone": "52 345 38 75"
+        }
+    `}</script>
       </Helmet>
 
       <StyledSection>
@@ -300,35 +324,57 @@ export default function Home() {
           <p>
             Technologie które sprostają <br /> największym wyzwaniom
           </p>
-          <button onClick={() => scrollTo('#HomePageArticle')}>Zobacz Więcej</button>
+          <button onClick={() => scrollTo("#HomePageArticle")}>
+            Zobacz Więcej
+          </button>
         </div>
         <div className="littleImage">
           <p>Autoryzowany Dystrybutor</p>
-          <Image
-            className="LctImage"
-            fluid={data.fluid.nodes[0].childImageSharp.fluid}
+          <GatsbyImage
+            image={loctiteLogo[0].gatsbyImageData}
+            alt="logo loctite teroson"
           />
         </div>
-        <Image
+        <GatsbyImage
           className="BckImage"
-          fluid={data.fluid.nodes[1].childImageSharp.fluid}
+          image={backgroundImage[0].gatsbyImageData}
+          alt="background image"
         />
       </StyledSection>
-      <StyledArticle id='HomePageArticle'>
-        <div className="articleLogo">
-       
-          <p>BIURO HANDLOWE</p>
-          <img alt='regpol logo' src={BottomLogo}></img>
-        </div>
-        <div class="articleDescription">
-          <h2 style="margin-top:30px;">Wysokiej jakości kleje przemysłowe</h2>
-          <p>
-            Witamy wszystkich bardzo serdecznie. Miło nam, że odwiedziliście Państwo naszą stronę. Firma Biuro Handlowe REGPOL Bydgoszcz Sp. z o.o. istnieje od 1992 roku. Jesteśmy autoryzowanym przedstawicielem firmy HENKEL. W ofercie naszego sklepu znajdują się produkty między innymi takie jak: Loctite 243 oraz Teroson MS 939, które w branży przemysłowej i motoryzacyjnej stanowią podstawową bazę środków chemicznych w naprawach, renowacjach i konserwacjach. Na szczególną uwagę zasługują produkty Teroson. Kleje te nie bez powodu cieszą się dużą popularnością, zważywszy na same pozytywne właściwości. Cały nasz asortyment został skrupulatnie dobrany, aby spełnić nawet najwyższe oczekiwania naszych Klientów.
-            <br><br>
-            Nasze doświadczenie, zdobyte po tylu latach obcowania z marką HENKEL, pozwala nam służyć Państwu wszelką pomocą w zakresie doboru odpowiedniego produktu oraz rozwiązywania najbardziej nietypowych problemów, z którymi mogą się Państwo spotkać nie tylko w sferze zawodowej. Serdecznie zapraszamy do skorzystania z naszej oferty!
-          </p>
-      </div>
-      </StyledArticle>
+      <StyledArticle id="HomePageArticle">
+          <div className="articleLogo">
+            <p>BIURO HANDLOWE</p>
+            <img alt="regpol logo" src={BottomLogo}></img>
+          </div>
+          <div className="articleDescription" style={{ marginTop: "30px" }}>
+            <h1 style={{ marginTop: "30px", fontSize: "30px" }}>
+              Wysokiej jakości kleje przemysłowe: loctite 243, teroson ms 939
+            </h1>
+            <p style={{ textAlign: "justify" }}>
+              Witamy wszystkich bardzo serdecznie. Miło nam, że odwiedziliście
+              Państwo naszą stronę. Firma Biuro Handlowe REGPOL Bydgoszcz Sp. z
+              o.o. istnieje od 1992 roku. Jesteśmy autoryzowanym
+              przedstawicielem firmy HENKEL. W ofercie naszego sklepu znajdują
+              się produkty między innymi takie jak: Loctite 243 oraz Teroson MS
+              939, które w branży przemysłowej i motoryzacyjnej stanowią
+              podstawową bazę środków chemicznych w naprawach, renowacjach i
+              konserwacjach. Na szczególną uwagę zasługują produkty Teroson.
+              Kleje te nie bez powodu cieszą się dużą popularnością, zważywszy
+              na same pozytywne właściwości. Gwarantujemy, że wybrany z
+              asortymentu klej do aluminium Loctite będzie spełniać najwyższe
+              oczekiwania. Funkcjonujemy po to, aby zapewnić Państwu komfortowy
+              zakup jakościowych produktów w jednym miejscu.{" "}
+            </p>
+            <p style={{ textAlign: "justify" }}>
+              Nasze doświadczenie, zdobyte po tylu latach obcowania z marką
+              HENKEL, pozwala nam służyć Państwu wszelką pomocą w zakresie
+              doboru odpowiedniego produktu oraz rozwiązywania najbardziej
+              nietypowych problemów, z którymi mogą się Państwo spotkać nie
+              tylko w sferze zawodowej. Zachęcamy do skorzystania z naszej
+              oferty!
+            </p>
+          </div>
+        </StyledArticle>
     </Layout>
-  )
+  );
 }
